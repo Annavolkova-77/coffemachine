@@ -1,0 +1,41 @@
+.coffee-machine {/*кофемашина*/
+  border: 3px solid black;/*рамка*/
+  margin-top: 100px; /*отступ*/
+}
+.coffee-list {/*кофемашина лев*/
+  background-image: url("img/background.jpg"); /*фон левой части*/
+  background-size: cover; /*убрали стыки*/
+  
+}
+.coffee-item {
+  background: rgba(0, 0, 0, 0.7);/*уу элементов появмлась черная полоса прозрачная*/
+  margin: 10px 0; /*полосочки*/
+  border-radius: calc(75px / 2); /*черные полоски под кнопки чашек*/
+  cursor: pointer; /*появимлся пальчик при наведении на кнопку*/
+}
+
+.coffee-item span {
+  color: white; /*текст белый*/
+  margin-left: 25px;
+}
+
+.coffee-item img {/*меняем картинку поменьше*/
+  height: 75px;
+  background: white; /*картинки с чашками стали все белые*/
+  border-radius: 50%; /*закруглили белый фон у чашек*/
+  margin-left: -15px;
+}
+.coffee-item:hover { 
+  background: rgba(50, 50, 50, 0.7);/*подсветка клавишь*/
+}
+  
+.coffee-oper { /*правая сторона - покрасили в серый цвет*/
+  background: lightgrey;
+} 
+
+.display { /*Выберите кофе дисплей*/
+   background: lightgreen; /*цвет дисплея*/
+   border: 3px solid darkgreen; /*рамка*/
+   padding: 10px;/* отступ*/
+   
+  }

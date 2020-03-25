@@ -15,7 +15,7 @@
       <div class="row coffee-machine">
         
         <div class="col-6 coffee-list">
-          <div class="row flex-column p-3">
+          <div class="row flex-column p-3 h-100 justify-content-around"> <!--h - высота 100%-->
             
             <div class="coffee-item col">
               <img src="img/americano.png" alt="">
@@ -51,12 +51,34 @@
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div> <!--из БС копировали-->
                   </div>
                 </div>
+                <div class="coffee-cup"> <!--кружка под дисплеем-->
+                  <img src="img/americano.png" alt=""><!---->
+                </div>
               </div>
-              <div class="col-6"></div>
-              
-             </div>
+              <div class="col-6"> <!--правая сторона правой стороны-->
+                
+                <div class="input-group mb-3"><!-- Баланс взяли из Bootstrap-->
+                  <input type="text" class="form-control" placeholder="Баланс" > <!--взяли из Bootstrap-(часть удалили)->
+                  <div class="input-group-append"><!--взяли из Bootstrap-->
+                    <span class="input-group-text" id="basic-addon2">&#8381</span><!--взяли из Bootstrap-->
+                  </div>
+               
+                
+                <div class = "atm"> <!--ATM-->
+                  <img src="img/bill_acc.png" alt=""> 
+                </div>
+                
+                <!--кнопки их Бутстрапа-->
+                <button class="btn btn-primary btn-block mt-2">Сдача</button><!---Кнопка Сдача, см. описание в тетеради-->
+                
+                <!--Кнопка под сдачу-->
+                  <div class="change-box"></div> <!--Кнопка под сдачу-->
+                
+                
+                
+              </div>
+            </div>
         </div>
-        
       </div>
     </div>
 

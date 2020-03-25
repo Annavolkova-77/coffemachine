@@ -37,5 +37,25 @@
    background: lightgreen; /*цвет дисплея*/
    border: 3px solid darkgreen; /*рамка*/
    padding: 10px;/* отступ*/
-   
+   margin-bottom: 30px; /*сделали отступ внешний снизу дисплея, чтобы отодвинуть немного кружку */
   }
+
+
+
+.coffee-cup img { /*картинка кружка*/
+  width: 100%; /*встает по ширине*/
+  
+}
+
+.atm img {/* АТМ*/
+   width: 100%; /*встает по ширине*/
+  
+}
+
+.change-box {/*Кнопка под сдачу-*/
+  background: grey; /*фон*/
+  border: 3px solid black;/*рамка*/
+  height: 100px;
+  margin-top: 15px;
+}
+

@@ -4,7 +4,7 @@
 }
 .coffee-list {/*кофемашина лев*/
   background-image: url("img/background.jpg"); /*фон левой части*/
-  background-size: cover; /*убрали стыки*/
+ background-size: cover; /*убрали стыки*/
   
 }
 .coffee-item {

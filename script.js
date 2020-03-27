@@ -10,6 +10,7 @@ let coffeeStatus = "waiting"; //"cooking", "ready"
 
 coffeeCup.onclick = takeCoffee; // второй вариант повесить событие: забрать кружку кликом
 
+
 function buyCoffee(name, cost,  elem) {/*функция заказ кофе*/
   /*alert(balance.value);/*смотрим, что в Балансе*/ /*добавили elem*/
   
@@ -71,7 +72,7 @@ function takeCoffee() { /*забрать кофе*/
     return;
   }
   coffeeStatus = "waiting";/*в ожидание следующего заказа*/
-  coffeeCup.classList.add("d-none"); /*скрыть ?*/
+  coffeeCup.classList.add("d-none"); /*скрыть */
   coffeeCup.style.cursor = "auto";/**/
   progressBar.style.width = "0%"; /*прогресс бар в ноль*/
   changeDisplayText("Выберите кофе");/*когда кофе забрали, высвечивается Выберите кофе*/
@@ -84,5 +85,59 @@ function changeDisplayText(text) {
   //displayText.innerText = "<span>"+text+"</span>";
   displayText.innerHTML = "<span>"+text+"</span>";
 }
+
+//--------------------------Drag'n'Drop--------------------------//
+
+
+let bills = document.querySelectorAll(".wallet img");/*выбираем все картинки из класса wallet  и с img*/
+
+for(let i = 0; i < bills.length; i++) { /*перебираем массив из картинок*/
+  bills[i].onmousedown = takeMoney; /*вешаем функцию takeMoney, когда мышь нажата*/
+}
+
+function takeMoney(event) {
+  
+  event.preventDefault();/*отключает функции стандартные, которые встроены в браузер, купюра тащится без призраков*/
+  
+  let bill = this;/*возвращает элемент, на которое сработало событие*/
+  let billCost = bill.getAttribute('cost');/*вынимает значение cost из Index */
+  console.log(billCost);
+  
+  
+  bill.style.position = "absolute"/*чтобы можно таскать купюры*/
+  bill.style.transform = "rotate(90deg)";/*чтобы поворачивать купюры*/
+  
+  // координаты купюр
+
+  let billCoords = bill.getBoundingClientRect();
+  let billWidth = billCoords.width/*переменная - ширина купюры*/
+  let billHeight = billCoords.height/*переменная - ширина купюры*/
+  
+  
+  bill.style.top = event.clientY - billWidth/2 + "px";/*купюры по центру Курсора*/
+  bill.style.left = event.clientX - billHeight/2+ "px";/*купюры по центру Курсора*/
+  
+  window.onmousemove = (event) => { /*отслеживаем положение курсора, */
+  bill.style.top = event.clientY - billWidth/2 + "px";/*купюры тащатся за курсором*/
+  bill.style.left = event.clientX - billHeight/2+ "px";/*купюры тащатся за курсором*/
+  
+    /*console.log(event.clientX, event.clientY)*/
+  };
+  
+  bill.onmouseup = dropMoney;
+  
+    /*console.log(event);
+  console.log(event.clientX, event.clientY);/*выводит координаты купюры в зависимости от того, где нажимаем на купюру*/
+
+}
+
+function dropMoney()/*отжатие мыши*/{
+  window.onmousemove = null; /*купюра не двигается за курсором, когда отжимаем кнопку мыши*/
+  
+}
+
+
+
+
 
 

@@ -83,6 +83,14 @@
     </div>
 
 
+    <div class="wallet"> <!--класс Купюры = wallet-->
+      <img src="img/50rub.jpg" alt="" cost="50"> <!--картинка --->
+      <img src="img/100rub.jpg" alt="" cost="100"><!--картинка --->
+      <img src="img/500rub.jpg" alt="" cost="500"><!--картинка --->
+    </div>
+
+
+
     <!-- Optional JavaScript -->
     <script src="script.js"></script><!--подключаем JavaScript-->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -8,6 +8,8 @@ let coffeeCup = document.querySelector(".coffee-cup img");
 let coffeeStatus = "waiting"; //"cooking", "ready"
 
 
+coffeeCup.onclick = takeCoffee; // второй вариант повесить событие: забрать кружку кликом
+
 function buyCoffee(name, cost,  elem) {/*функция заказ кофе*/
   /*alert(balance.value);/*смотрим, что в Балансе*/ /*добавили elem*/
   
@@ -62,6 +64,19 @@ function cookCoffee(name, elem) { /*добавили функцию готовк
       clearInterval(cookingInterval);/*чтоб полоска не шла дальше (заканчивается */
     }
   }, 100);
+}
+
+function takeCoffee() { /*забрать кофе*/
+  if (coffeeStatus != "ready") { /*если не готов, то ничего не делать, т.е return*/
+    return;
+  }
+  coffeeStatus = "waiting";/*в ожидание следующего заказа*/
+  coffeeCup.classList.add("d-none"); /*скрыть ?*/
+  coffeeCup.style.cursor = "auto";/**/
+  progressBar.style.width = "0%"; /*прогресс бар в ноль*/
+  changeDisplayText("Выберите кофе");/*когда кофе забрали, высвечивается Выберите кофе*/
+  
+  
 }
 
 

@@ -134,10 +134,123 @@ function takeMoney(event) {
 function dropMoney()/*отжатие мыши*/{
   window.onmousemove = null; /*купюра не двигается за курсором, когда отжимаем кнопку мыши*/
   
+  let bill = this; /*текущее значение*/
+  let billCost = bill.getAttribute('cost');/*вынимает значение cost из Index */
+  
+  if (inAtm(bill)) {
+   balance.value = +balance.value + +billCost /*купюра пропадает и балансе зачисляется*/
+   bill.remove();/*Метод, который УДАЛЯЕТ элемент со страницф!!! (купюра удаляется)*/
+  } 
 }
 
+function inAtm(bill) {/*находится ли купюра в банкомате*/
+  
+  
+  
+  let billCoord = bill.getBoundingClientRect();/*находим  коорд купюру*/
+  let atm = document.querySelector(".atm");/*нашли АТМ*/
+  let atmCoord = atm.getBoundingClientRect();/*находим коорд атм*/
+  
+  //-------- ищем координаты купюры и атм
+  
+  let billLeftTopCornerX = billCoord.x;/*левый верхний край купюры*/
+  let billLeftTopCornerY = billCoord.y;
+  
+  let billRightTopCornerX = billCoord.x +  billCoord.width;/*правый верхний край купюры (прибавили ширину)*/
+  let billRightTopCornerY = billCoord.y;
+  
+  
+  let atmLeftTopCornerX = atmCoord.x;/*левый верхний край АТМ*/
+  let atmLeftTopCornerY = atmCoord.y;
+  
+  let atmRightTopCornerX = atmCoord.x + atmCoord.width;/*правый верхний край АТМ*/
+  let atmRightTopCornerY = atmCoord.y;
+  
+  let atmLeftBottomCornerX = atmCoord.x;/*левый нижний край АТМ*/
+  let atmLeftBottomCornerY = atmCoord.y + atmCoord.height/3;/**/
+  
+  let atmRightBottomCornerX = atmCoord.x + atmCoord.width;/*правый нижний край АТМ*/
+  let atmRightBottomCornerY = atmCoord.y + atmCoord.height/3;
+  
+  //----Условие: попадает ли купюра в Атм 
+  
+  if (
+      billLeftTopCornerX >= atmLeftTopCornerX /*проверяем, что только левый верхний угол купюры попадает в атм*/
+      && billLeftTopCornerY >= atmLeftTopCornerY
+      && billRightTopCornerX <= atmRightTopCornerX /*проверяем, что только правый верхний угол купюры попадает в атм*/
+      && billRightTopCornerY >= atmRightTopCornerY
+      
+      && billLeftTopCornerX >= atmLeftBottomCornerX/*сравниваем лев верх край купюры и ниж край атм*/
+      && billRightTopCornerY <= atmLeftBottomCornerY
+    ){
+      return true;
+    } else {
+      return false;
+    }
+  
+}
 
+//------------------Сдача!--------------
 
+let changeButton = document.querySelector(".change"); /*ищем класс кнопки Сдача*/
+changeButton.onclick = takeChange;/*вешаем событие - функцию takeChange*/
 
+function takeChange() { /*функция - забрать сдачу*/
+   tossCoin("10");/*вызвали функция создания монеток*/
+}
 
-
+function tossCoin(cost) { /*функция создания монеток*/
+  let changeContainer = document.querySelector(".change-box");/*ищем класс контейнера для сдачи*/
+  let changeContainerCoords = changeContainer.getBoundingClientRect()/*координаты бокса для сдачи*/
+  
+  
+  
+  
+  
+  let coinSrc = "";/*путь к картинки нашей монетки*/
+  
+  switch (cost) {
+    case "10":
+      coinSrc = "img/10rub.png";/*путь к картинки  монетки 10руб*/
+      break;
+    case "5":
+      coinSrc = "img/5rub.png";
+      break;
+    case "2":
+      coinSrc = "img/2rub.png";
+      break;
+    case "1":
+      coinSrc = "img/1rub.png";
+      break;
+  }
+  
+  /*
+  //---создание монеток внутки контейнера c помощью innerHTML
+  changeContainer.innerHTML += `
+    <img src="${coinSrc}" style="height: 50px"> 
+  `*/
+  
+  //---создание монеток внутки контейнера c помощью changeContainer.append(coin)
+  
+ let coin = document.createElement("img");
+ coin.setAttribute("src", coinSrc);
+ coin.style.height = "50px";
+ coin.style.width = "50px";
+ coin.style.cursor = "pointer";
+ coin.style.display = "inline-block";/**/
+ coin.style.position = "absolute";/**/
+  
+ changeContainer.append(coin);/*Прикрепить после внутри элемента*/
+ /*changeContainer.prepend(coin);/*Прикрепить до внутри элемента
+  
+  changeContainer.after(coin);/*после контейнера
+  changeContainer.before(coin);/*перед контейнера
+  
+  changeContainer.replace(coin);/*заменяет элементы*/
+  
+  coin.style.top = Math.round(Math.random() * (changeContainerCoords.height - 53)) + "px";/* рандомная функция  - монетки случайным образом кладутся*/
+  coin.style.left = Math.round(Math.random() * (changeContainerCoords.width - 53)) + "px";
+  
+  coin.onclick = () => coin.remove();/*вешаем событие - монетки пропадают при на их нажатии*/
+} 
+  

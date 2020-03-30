@@ -69,7 +69,7 @@
                 </div>
                 
                 <!--кнопки их Бутстрапа-->
-                <button class="btn btn-primary btn-block mt-2">Сдача</button><!---Кнопка Сдача, см. описание в тетеради-->
+                <button class="btn btn-primary btn-block mt-2 change" >Сдача</button><!---Кнопка Сдача, см. описание в тетеради-->
                 
                 <!--Кнопка под сдачу-->
                   <div class="change-box"></div> <!--Кнопка под сдачу-->

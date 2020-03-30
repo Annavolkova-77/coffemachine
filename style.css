@@ -60,3 +60,12 @@
   margin-top: 15px;
 }
 
+.wallet img {
+  cursor: pointer;/*курсор на купюрах рука*/
+  width: 20%; /*размер купюры*/
+}
+
+.change-box {/*чтоб монетки попадали в контейнер*/
+position: relative;
+}
+/

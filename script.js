@@ -145,8 +145,6 @@ function dropMoney()/*отжатие мыши*/{
 
 function inAtm(bill) {/*находится ли купюра в банкомате*/
   
-  
-  
   let billCoord = bill.getBoundingClientRect();/*находим  коорд купюру*/
   let atm = document.querySelector(".atm");/*нашли АТМ*/
   let atmCoord = atm.getBoundingClientRect();/*находим коорд атм*/
@@ -195,16 +193,44 @@ function inAtm(bill) {/*находится ли купюра в банкомат
 let changeButton = document.querySelector(".change"); /*ищем класс кнопки Сдача*/
 changeButton.onclick = takeChange;/*вешаем событие - функцию takeChange*/
 
+
 function takeChange() { /*функция - забрать сдачу*/
-   tossCoin("10");/*вызвали функция создания монеток*/
+   /*tossCoin("10");/*вызвали функция создания монеток*/
+   if (balance.value <= 0 ) { //если нет денег, то не выдаем сдачу, value - значение баланса
+   changeButton.onclick = takeChange;/*чтоб НЕ выпадали лишние сдача!!!*/
+    return; 
+   }
+   changeButton.onclick = null; /*чтоб НЕ выпадали лишние сдача!!!*/
+   if (balance.value - 10 >= 0) {
+     setTimeout (() => { // задержка звука
+     tossCoin("10"); //выдать 10
+     balance.value -= 10;// вычесть 10 из баланса
+     return takeChange();
+     }, 300);
+   } else if (balance.value - 5 >= 0) {
+     setTimeout (() => { // задержка звука
+     tossCoin("5");
+     balance.value -= 5;
+     return takeChange();
+     }, 300);
+   }else if (balance.value - 2 >= 0) {
+     setTimeout (() => { // задержка звука
+     tossCoin("2");
+     balance.value -= 2;
+     return takeChange();
+     }, 300);
+   }else if (balance.value - 1 >= 0) {
+     setTimeout (() => { // задержка звука
+     tossCoin("1");
+     balance.value -= 1;
+     return takeChange();
+     }, 300);
+   }
 }
 
 function tossCoin(cost) { /*функция создания монеток*/
   let changeContainer = document.querySelector(".change-box");/*ищем класс контейнера для сдачи*/
   let changeContainerCoords = changeContainer.getBoundingClientRect()/*координаты бокса для сдачи*/
-  
-  
-  
   
   
   let coinSrc = "";/*путь к картинки нашей монетки*/
@@ -239,6 +265,7 @@ function tossCoin(cost) { /*функция создания монеток*/
  coin.style.cursor = "pointer";
  coin.style.display = "inline-block";/**/
  coin.style.position = "absolute";/**/
+ coin.style.userSelect = "none";/*чтоб не выделялись монеты, когда падают*/
   
  changeContainer.append(coin);/*Прикрепить после внутри элемента*/
  /*changeContainer.prepend(coin);/*Прикрепить до внутри элемента
@@ -252,5 +279,11 @@ function tossCoin(cost) { /*функция создания монеток*/
   coin.style.left = Math.round(Math.random() * (changeContainerCoords.width - 53)) + "px";
   
   coin.onclick = () => coin.remove();/*вешаем событие - монетки пропадают при на их нажатии*/
+  
+  let coinSound = new Audio("sound/coindrop.mp3");/*звук падающих монет*/
+     /*coinSound.src = "sound/coindrop.mp3"*/
+     coinSound.play();/*проиграть с помощью метода Плэй*/
+    
+  
 } 
   
